@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce Business Analysis Portfolio</title>
+  <style>
+    :root {
+      --bg: #f2ede4;
+      --panel: rgba(255, 251, 245, 0.86);
+      --panel-strong: #fffaf3;
+      --ink: #171512;
+      --muted: #675f55;
+      --line: rgba(77, 61, 42, 0.12);
+      --brand: #0d6258;
+      --brand-deep: #083f39;
+      --accent: #cb7a33;
+      --accent-soft: rgba(203, 122, 51, 0.12);
+      --shadow: 0 24px 60px rgba(48, 36, 22, 0.12);
+      --radius: 28px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Palatino Linotype", "Book Antiqua", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(203, 122, 51, 0.15), transparent 26%),
+        radial-gradient(circle at top right, rgba(13, 98, 88, 0.14), transparent 24%),
+        linear-gradient(180deg, #faf7f2 0%, var(--bg) 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1, h2, h3, h4, p {
+      margin: 0;
+    }
+
+    .shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 251, 245, 0.72);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 24px rgba(32, 25, 17, 0.06);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff7ef;
+      background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+      font-size: 0.98rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.98rem;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      padding: 9px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: transform 140ms ease, background 140ms ease, color 140ms ease;
+    }
+
+    .nav a:hover {
+      transform: translateY(-1px);
+      background: rgba(13, 98, 88, 0.08);
+      color: var(--brand-deep);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 38px;
+      background:
+        linear-gradient(135deg, rgba(8, 63, 57, 0.98), rgba(18, 55, 75, 0.96));
+      color: #fcf6ee;
+      box-shadow: var(--shadow);
+      padding: 42px;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 420px;
+      height: 420px;
+      right: -140px;
+      top: -160px;
+      background: radial-gradient(circle, rgba(203, 122, 51, 0.34), transparent 65%);
+    }
+
+    .hero::after {
+      width: 320px;
+      height: 320px;
+      left: -120px;
+      bottom: -170px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.11), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      margin-top: 18px;
+    }
+
+    .hero-copy h1 {
+      max-width: 9ch;
+      font-size: clamp(3rem, 6vw, 5.4rem);
+      line-height: 0.97;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-copy p {
+      max-width: 700px;
+      margin-top: 20px;
+      color: rgba(252, 246, 238, 0.86);
+      line-height: 1.75;
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 0.95rem;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .button.primary {
+      background: #fbf2e6;
+      color: #18332e;
+      border-color: transparent;
+    }
+
+    .button.primary:hover {
+      background: #fff8ef;
+    }
+
+    .hero-aside {
+      display: grid;
+      gap: 14px;
+      align-content: end;
+    }
+
+    .hero-card {
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .hero-card p,
+    .hero-card li {
+      color: rgba(252, 246, 238, 0.84);
+      line-height: 1.7;
+      font-size: 0.97rem;
+    }
+
+    .hero-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 24px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 22px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.84rem;
+    }
+
+    .metric-value {
+      margin-top: 12px;
+      color: var(--brand-deep);
+      font-size: clamp(1.85rem, 3vw, 2.9rem);
+      line-height: 1;
+    }
+
+    .metric-note {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.93rem;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding: 30px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.02;
+    }
+
+    .section-header p,
+    .copy,
+    li {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .story {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .highlight-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .mini-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .mini-card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(13, 98, 88, 0.08);
+      color: var(--brand-deep);
+      font-size: 0.9rem;
+    }
+
+    .pill.alt {
+      background: var(--accent-soft);
+      color: #8c4d18;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .timeline-step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(13, 98, 88, 0.12), rgba(8, 63, 57, 0.14));
+      color: var(--brand-deep);
+      font-size: 1.15rem;
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 6px;
+      font-size: 1.08rem;
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    .report-grid,
+    .recommendation-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .report-card,
+    .recommendation {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .report-card h3,
+    .recommendation h3 {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .report-card p,
+    .recommendation p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .visual-intro {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .chart-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .chart-card {
+      overflow: hidden;
+    }
+
+    .chart-media {
+      padding: 16px;
+      background: linear-gradient(180deg, #fffdf9 0%, #f7f1e8 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .chart-media img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .chart-copy {
+      padding: 18px 20px 20px;
+    }
+
+    .chart-copy h3 {
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+    }
+
+    .file-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .file-card {
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .file-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .file-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 24px 10px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 1040px) {
+      .metrics,
+      .report-grid,
+      .recommendation-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .story,
+      .chart-grid,
+      .file-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(100% - 20px, var(--max));
+        padding-top: 14px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 24px;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero,
+      .section {
+        padding: 22px;
+        border-radius: 26px;
+      }
+
+      .metrics,
+      .report-grid,
+      .recommendation-grid,
+      .file-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-step {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+      }
+
+      .chart-media {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-badge">EA</div>
+        <div class="brand-copy">
+          <strong>Ecommerce Business Analysis</strong>
+          <span>Portfolio case study with Python, Jupyter, and business storytelling</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#story">Story</a>
+        <a href="#process">Process</a>
+        <a href="#reports">Reports</a>
+        <a href="#visuals">Visuals</a>
+        <a href="#actions">Actions</a>
+        <a href="#files">Files</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <div class="eyebrow">End-to-End Analytics Project</div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Turning Ecommerce Orders Into Clear Business Direction</h1>
+          <p>
+            This portfolio project is designed like a compact business case study rather than a notebook dump. It begins with raw transactional data, builds a reliable cleaned dataset, measures commercial performance across products, categories, regions, and discount levels, and finishes with practical recommendations that support pricing, inventory, and growth decisions.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="reports/03_business_insights.html">Read Final Insight Report</a>
+            <a class="button" href="reports/02_exploratory_analysis.html">Open Analysis Report</a>
+            <a class="button" href="README.md">Project README</a>
+          </div>
+        </div>
+        <aside class="hero-aside">
+          <div class="hero-card">
+            <h3>Project Scope</h3>
+            <p>Analyze 1,500 ecommerce orders to understand revenue quality, profit drivers, discount risk, and regional performance.</p>
+          </div>
+          <div class="hero-card">
+            <h3>Core Outputs</h3>
+            <ul>
+              <li>Cleaned dataset for repeatable analysis</li>
+              <li>KPI and trend reporting</li>
+              <li>Saved presentation-ready charts</li>
+              <li>Business recommendations in plain language</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="grid metrics">
+      <article class="card metric">
+        <div class="metric-label">Total Revenue</div>
+        <div class="metric-value">$226,161.71</div>
+        <div class="metric-note">Revenue generated across all analyzed orders.</div>
+      </article>
+      <article class="card metric">
+        <div class="metric-label">Total Profit</div>
+        <div class="metric-value">$46,756.39</div>
+        <div class="metric-note">Healthy top-line profit, with room to protect margin further.</div>
+      </article>
+      <article class="card metric">
+        <div class="metric-label">Average Order Value</div>
+        <div class="metric-value">$150.77</div>
+        <div class="metric-note">A useful benchmark for campaign and basket optimization.</div>
+      </article>
+      <article class="card metric">
+        <div class="metric-label">Profit Margin</div>
+        <div class="metric-value">20.67%</div>
+        <div class="metric-note">Strong overall, but sensitive to higher discount bands.</div>
+      </article>
+    </section>
+
+    <section class="card section" id="story">
+      <div class="section-header">
+        <div>
+          <span class="kicker">Business Context</span>
+          <h2>The Story Behind The Analysis</h2>
+        </div>
+      </div>
+      <div class="grid story">
+        <div>
+          <p class="copy">
+            An ecommerce business can appear successful when revenue is growing, but revenue alone does not explain whether the business is improving. Discounts can inflate sales while weakening margin, certain product categories can drive volume without delivering enough profit, and strong national performance can hide weak regional results.
+          </p>
+          <p class="copy" style="margin-top: 16px;">
+            This project answers that broader question: not just how much the business sold, but where value is really being created. The analysis focuses on product mix, regional variation, monthly patterns, and pricing pressure so the final recommendations feel operational rather than academic.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Top category: Electronics</span>
+            <span class="pill">Top region: North</span>
+            <span class="pill">Top product: Portable SSD</span>
+            <span class="pill alt">1,500 orders reviewed</span>
+          </div>
+        </div>
+        <div class="highlight-stack">
+          <div class="mini-card">
+            <h3>What The Project Demonstrates</h3>
+            <p>Technical cleaning, structured analysis, chart communication, and business interpretation in one coherent workflow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section" id="process">
+      <div class="section-header">
+        <div>
+          <span class="kicker">Analysis Flow</span>
+          <h2>How The Project Moves From Raw Data To Recommendations</h2>
+        </div>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-step">01</div>
+          <div>
+            <h3>Prepare The Dataset</h3>
+            <p class="copy">Convert the order date correctly, validate required fields, clean numeric columns, remove duplicates, and create reusable analysis columns such as year, month, month name, and profit margin.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-step">02</div>
+          <div>
+            <h3>Measure Business Performance</h3>
+            <p class="copy">Calculate total revenue, total profit, average order value, and margin. Break performance down by category, product, region, and month to understand where results are strongest and where they begin to weaken.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-step">03</div>
+          <div>
+            <h3>Translate Findings Into Decisions</h3>
+            <p class="copy">Use discount analysis, trend reporting, and segment comparisons to create recommendations around pricing strategy, promotion planning, product focus, and regional prioritization.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section" id="reports">
+      <div class="section-header">
+        <div>
+          <span class="kicker">Notebook Reports</span>
+          <h2>Three Reports, One Narrative</h2>
+          <p>Each notebook has been exported to HTML so the full analysis can be reviewed without opening Jupyter.</p>
+        </div>
+      </div>
+      <div class="grid report-grid">
+        <article class="report-card">
+          <h3>01 Data Cleaning</h3>
+          <p>Builds a reliable analysis base by cleaning the raw file, validating structure, converting data types, and saving the cleaned dataset.</p>
+          <a class="button primary" href="reports/01_data_cleaning.html">Open Cleaning Report</a>
+        </article>
+        <article class="report-card">
+          <h3>02 Exploratory Analysis</h3>
+          <p>Measures the business across core KPIs and segment performance, then creates the charts used to support the broader story.</p>
+          <a class="button primary" href="reports/02_exploratory_analysis.html">Open Analysis Report</a>
+        </article>
+        <article class="report-card">
+          <h3>03 Business Insights</h3>
+          <p>Reframes the analysis for a stakeholder audience, summarizing what matters most and what actions should follow.</p>
+          <a class="button primary" href="reports/03_business_insights.html">Open Insight Report</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section" id="visuals">
+      <div class="section-header">
+        <div>
+          <span class="kicker">Visual Storytelling</span>
+          <h2>The Evidence Behind The Recommendations</h2>
+        </div>
+      </div>
+      <p class="visual-intro">
+        Instead of shrinking the charts into decorative thumbnails, this layout keeps them readable and proportional so the viewer can actually inspect the data story. Each visual supports a specific business point: where revenue is concentrated, where margin is at risk, and how performance changes over time.
+      </p>
+      <div class="grid chart-grid">
+        <article class="card chart-card">
+          <div class="chart-media">
+            <img src="visuals/sales_profit_by_category.png" alt="Bar chart showing sales and profit by category">
+          </div>
+          <div class="chart-copy">
+            <h3>Category Performance</h3>
+            <p class="copy">Shows which categories convert demand into profit well and which may require closer pricing or assortment review.</p>
+          </div>
+        </article>
+        <article class="card chart-card">
+          <div class="chart-media">
+            <img src="visuals/top_products_by_sales.png" alt="Horizontal bar chart showing the top products by sales">
+          </div>
+          <div class="chart-copy">
+            <h3>Product Leaders</h3>
+            <p class="copy">Highlights the highest-revenue products and where focused promotion or bundling could have the strongest effect.</p>
+          </div>
+        </article>
+        <article class="card chart-card">
+          <div class="chart-media">
+            <img src="visuals/monthly_sales_profit_trends.png" alt="Line chart showing monthly sales and profit trends">
+          </div>
+          <div class="chart-copy">
+            <h3>Monthly Trends</h3>
+            <p class="copy">Reveals sales rhythm over time, helping turn reactive planning into calendar-based operational planning.</p>
+          </div>
+        </article>
+        <article class="card chart-card">
+          <div class="chart-media">
+            <img src="visuals/regional_sales_profit.png" alt="Bar chart showing regional sales and profit">
+          </div>
+          <div class="chart-copy">
+            <h3>Regional Comparison</h3>
+            <p class="copy">Makes it clear where the business is strongest geographically and where expansion or correction efforts should focus.</p>
+          </div>
+        </article>
+        <article class="card chart-card">
+          <div class="chart-media">
+            <img src="visuals/profit_by_discount_band.png" alt="Bar chart showing profit by discount band">
+          </div>
+          <div class="chart-copy">
+            <h3>Discount Risk</h3>
+            <p class="copy">Connects pricing behavior directly to profit outcome, making discount strategy a visible commercial decision rather than a guess.</p>
+          </div>
+        </article>
+        <article class="card chart-card">
+          <div class="chart-media">
+            <img src="visuals/business_insights_monthly_overview.png" alt="Line chart showing monthly business performance overview">
+          </div>
+          <div class="chart-copy">
+            <h3>Final Performance View</h3>
+            <p class="copy">Brings the monthly story together in a final summary view that supports the recommendations section.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section" id="actions">
+      <div class="section-header">
+        <div>
+          <span class="kicker">Recommended Actions</span>
+          <h2>What The Business Should Do Next</h2>
+        </div>
+      </div>
+      <div class="grid recommendation-grid">
+        <article class="recommendation">
+          <h3>Protect Margin During Discounting</h3>
+          <p>Review deeper discount tiers carefully and avoid aggressive promotions on products already operating with weak margin.</p>
+        </article>
+        <article class="recommendation">
+          <h3>Double Down On Strong Segments</h3>
+          <p>Prioritize investment in the best-performing category and region where growth appears strongest and margin is better supported.</p>
+        </article>
+        <article class="recommendation">
+          <h3>Use Top Products As Growth Levers</h3>
+          <p>Support leading products with bundles, cross-sells, and repeat-purchase campaigns to improve basket value.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section" id="files">
+      <div class="section-header">
+        <div>
+          <span class="kicker">Project Assets</span>
+          <h2>Explore The Full Project</h2>
+          <p>Quick access to the core files behind the analysis.</p>
+        </div>
+      </div>
+      <div class="grid file-grid">
+        <article class="file-card">
+          <strong>Datasets</strong>
+          <div class="file-links">
+            <a class="pill" href="data/raw/ecommerce_data.csv">Raw CSV</a>
+            <a class="pill" href="data/cleaned/ecommerce_data_cleaned.csv">Cleaned CSV</a>
+          </div>
+        </article>
+        <article class="file-card">
+          <strong>Notebook HTML Reports</strong>
+          <div class="file-links">
+            <a class="pill" href="reports/01_data_cleaning.html">Cleaning</a>
+            <a class="pill" href="reports/02_exploratory_analysis.html">EDA</a>
+            <a class="pill" href="reports/03_business_insights.html">Insights</a>
+          </div>
+        </article>
+        <article class="file-card">
+          <strong>Python Source Files</strong>
+          <div class="file-links">
+            <a class="pill" href="src/cleaning.py">cleaning.py</a>
+            <a class="pill" href="src/analysis.py">analysis.py</a>
+            <a class="pill" href="src/utils.py">utils.py</a>
+          </div>
+        </article>
+        <article class="file-card">
+          <strong>Documentation</strong>
+          <div class="file-links">
+            <a class="pill" href="README.md">README.md</a>
+            <a class="pill" href="requirements.txt">requirements.txt</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      Built as a premium-style portfolio case study with Python, pandas, numpy, matplotlib, Jupyter, exported HTML reports, and a structured story from raw data to business recommendation.
+    </footer>
+  </main>
+</body>
+</html>
